@@ -15,7 +15,7 @@ This will:
 2. Build the Swift menu bar app
 3. Install the MCP server
 4. Auto-configure Claude Code and OpenCode (if installed)
-5. Install the binary to `/usr/local/bin/focus`
+5. Install the binary to `~/.local/bin/focus`
 
 Then run it:
 ```bash
@@ -242,7 +242,8 @@ focus/
 swift build -c release
 
 # Copy binary
-sudo cp .build/release/Focus /usr/local/bin/focus
+mkdir -p ~/.local/bin
+cp .build/release/Focus ~/.local/bin/focus
 
 # Add to Login Items
 # System Settings → General → Login Items → add "focus"

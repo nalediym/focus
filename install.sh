@@ -54,14 +54,14 @@ info "Installing MCP server dependencies..."
 (cd mcp && bun install --silent 2>/dev/null)
 ok "MCP server ready"
 
-# ── install to /usr/local/bin ────────────────────────────
+# ── install to ~/.local/bin ────────────────────────────
 
-info "Installing binary to /usr/local/bin/focus..."
-cp .build/release/Focus /usr/local/bin/focus 2>/dev/null || {
-  warn "Cannot write to /usr/local/bin — trying with sudo"
-  sudo cp .build/release/Focus /usr/local/bin/focus
+info "Installing binary to ~/.local/bin/focus..."
+mkdir -p "$HOME/.local/bin"
+cp .build/release/Focus "$HOME/.local/bin/focus" 2>/dev/null || {
+  warn "Cannot write to ~/.local/bin"
 }
-ok "Installed: /usr/local/bin/focus"
+ok "Installed: ~/.local/bin/focus"
 
 # ── configure MCP: Claude Code ───────────────────────────
 
@@ -201,6 +201,6 @@ if [[ "${1:-}" == "--launch" ]]; then
   info "Launching Focus..."
   pkill -f "focus" 2>/dev/null || true
   sleep 0.5
-  nohup /usr/local/bin/focus >/dev/null 2>&1 &
+  nohup "$HOME/.local/bin/focus" >/dev/null 2>&1 &
   ok "Focus is running (PID $!)"
 fi
